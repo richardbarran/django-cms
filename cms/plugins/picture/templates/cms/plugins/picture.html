@@ -1,5 +1,29 @@
-<span class="plugin_picture{% if picture.float %} align-{{ picture.float }}{% endif %}">
+{% load thumbnail %}
+{% spaceless %}
+
+{% comment %}
+	Handle image thumbnails within django-cms. django-cms uploads the pictures to 
+	media/cms_page_media, then create a Picture instance. This is available to this
+	template, and we use the thumbnail tag to generate a thumbnail automagically.
+	
+	Notes:
+	- creates different sized thumbnails according to the placeholder name.
+	- the image sizes are maximums (there is no cropping here.)
+	- small images are not upscaled.
+{% endcomment %}
+
+{% if picture.url %}<a href="{{ picture.url }}">{% endif %}
 {% if link %}<a href="{{ link }}">{% endif %}
-<img src="{{ picture.image.url }}" alt="{{ picture.alt }}"{% if picture.longdesc %} title="{{ picture.longdesc }}"{% endif %} />
+{% ifequal placeholder "right_column" %}
+    <img src="{% thumbnail picture.image 150x150 %}"
+{% else %}
+	{# Default to a size suitable for the "content" placeholder. #}
+    <img src="{% thumbnail picture.image 300x600 %}"
+{% endifequal %}
+{% if picture.alt %} alt="{{ picture.alt }}"{% endif %}
+{% if picture.longdesc %} title="{{ picture.longdesc }}"{% endif %}
+{% if picture.float %} class="align-{{ picture.float }}"{% endif %} />
+{% if picture.url %}</a>{% endif %}
 {% if link %}</a>{% endif %}
-</span>
+
+{% endspaceless %}
