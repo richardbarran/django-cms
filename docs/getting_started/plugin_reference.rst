@@ -132,14 +132,14 @@ in it create a file called ``picture.html``. Here is an example
 
     {% load thumbnail %}
 
-    {% if picture.url %}<a href="{{ picture.url }}">{% endif %}
+    {% if link %}<a href="{{ link }}">{% endif %}
     {% ifequal placeholder "content" %}
         <img src="{% thumbnail picture.image 300x600 %}"{% if picture.alt %} alt="{{ picture.alt }}"{% endif %} />
     {% endifequal %}
     {% ifequal placeholder "teaser" %}
         <img src="{% thumbnail picture.image 150x150 %}"{% if picture.alt %} alt="{{ picture.alt }}"{% endif %} />
     {% endifequal %}
-    {% if picture.url %}</a>{% endif %}
+    {% if link %}</a>{% endif %}
 
 
 In this template the picture is scaled differently based on which placeholder
