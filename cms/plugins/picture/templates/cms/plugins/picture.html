@@ -12,7 +12,6 @@
 	- small images are not upscaled.
 {% endcomment %}
 
-{% if picture.url %}<a href="{{ picture.url }}">{% endif %}
 {% if link %}<a href="{{ link }}">{% endif %}
 {% ifequal placeholder "right_column" %}
     <img src="{% thumbnail picture.image 150x150 %}"
@@ -23,7 +22,6 @@
 {% if picture.alt %} alt="{{ picture.alt }}"{% endif %}
 {% if picture.longdesc %} title="{{ picture.longdesc }}"{% endif %}
 {% if picture.float %} class="align-{{ picture.float }}"{% endif %} />
-{% if picture.url %}</a>{% endif %}
 {% if link %}</a>{% endif %}
 
 {% endspaceless %}
